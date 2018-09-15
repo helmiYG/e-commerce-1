@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#history" data-toggle="modal" data-target="#history" @click="getHistory">Transction History</a>
+                        <a class="nav-link" href="#history" data-toggle="modal" data-target="#history" @click="getHistory" v-if="token">Transction History</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -434,7 +434,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <script>
-        let base_url = 'http://localhost:3000'
+        let base_url = 'https://server-ecommerce.helmiyogantara.club'
         var app = new Vue({
             el: '#app',
             data: {
