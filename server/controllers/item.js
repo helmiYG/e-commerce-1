@@ -2,17 +2,21 @@ const Item = require('../models/item');
 
 module.exports = {
     insert: (req, res) => {
-        Item.create(req.body)
-            .then(result => {
-                res.status(200).json({
-                    msg: 'insert succes'
-                })
-            })
-            .catch(err => {
-                res.status(400).json({
-                    msg: 'insert failed'
-                })
-            })
+        console.log('masuk');
+        console.log(req.body);
+        console.log(req.headers);
+        
+        // Item.create(req.body)
+        //     .then(result => {
+        //         res.status(200).json({
+        //             msg: 'insert succes'
+        //         })
+        //     })
+        //     .catch(err => {
+        //         res.status(400).json({
+        //             msg: 'insert failed'
+        //         })
+        //     })
     },
 
     getItem: (req, res) => {

@@ -20,15 +20,14 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                 </ul>
-               
                 <form class="form-inline my-2 my-lg-0">
                     <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
                     <button class="btn btn-outline-light" type="button" data-toggle="modal" data-target="#cart" v-if="token">
@@ -36,13 +35,22 @@
                         <i class="fa fa-shopping-cart" style="font-size:16px"></i>
                     </button>
                     <button class="btn btn-outline-light my-2 my-sm-0" type="button" v-if="token" v-on:click="logout()">Logout</button>
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal" data-target="#login" v-if="!token" v-on:click="remove_stLogin()">Login</button>
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal" data-target="#register" v-if="!token"
-                        v-on:click="remove_isReg()">Register</button>
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal" data-target="#login"
+                        v-if="!token" v-on:click="remove_stLogin()">Login</button>
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal" data-target="#register"
+                        v-if="!token" v-on:click="remove_isReg()">Register</button>
                 </form>
             </div>
         </nav>
 
+        <div v-if="msgScBuy" class="alert alert-success alert-dismissible fade show" role="alert">
+            <center>
+                <strong> {{msgScBuy}} </strong>
+            </center>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         <!-- Page Content -->
         <div class="container">
 
@@ -66,11 +74,13 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Min</label>
-                                                <input type="number" name="pax" step="20000" class="form-control" id="inputEmail4" placeholder="0" v-model="min">
+                                                <input type="number" name="pax" step="20000" class="form-control" id="inputEmail4"
+                                                    placeholder="0" v-model="min">
                                             </div>
                                             <div class="form-group col-md-6 text-right">
                                                 <label>Max</label>
-                                                <input type="number" name="pax" step="20000" class="form-control" placeholder="0" v-model="max">
+                                                <input type="number" name="pax" step="20000" class="form-control"
+                                                    placeholder="0" v-model="max">
                                             </div>
                                             <button type="button" class="btn btn-dark" v-on:click="filter()">filter</button>
                                         </div>
@@ -80,23 +90,24 @@
                             </article>
                         </div>
                         <div class="card">
-                                <article class="card-group-item">
-                                    <header class="card-header">
-                                        <h6 class="title">Search by Item </h6>
-                                    </header>
-                                    <div class="filter-content">
-                                        <div class="card-body">
-                                            <div class="form-row">
-                                                    <form class="form-inline" style="margin-bottom: 10px">
-                                                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="toSearch">
-                                                    </form>    
-                                                    <button class="btn btn-dark my-2 my-sm-0" type="button" v-on:click="search()">Search</button>
-                                            </div>
+                            <article class="card-group-item">
+                                <header class="card-header">
+                                    <h6 class="title">Search by Item </h6>
+                                </header>
+                                <div class="filter-content">
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <form class="form-inline" style="margin-bottom: 10px">
+                                                <input class="form-control mr-sm-2" type="search" placeholder="Search"
+                                                    aria-label="Search" v-model="toSearch">
+                                            </form>
+                                            <button class="btn btn-dark my-2 my-sm-0" type="button" v-on:click="search()">Search</button>
                                         </div>
-                                        <!-- card-body.// -->
                                     </div>
-                                </article>
-                            </div>
+                                    <!-- card-body.// -->
+                                </div>
+                            </article>
+                        </div>
 
                     </div>
                     <!-- card.// -->
@@ -150,8 +161,10 @@
                                     </h4>
                                     <h5> Price: {{item.price}} </h5>
                                     <p class="card-text"> Stock: {{item.stock}} </p>
-                                    <button class="btn btn-dark my-2 my-sm-0 btn-sm" type="button" v-on:click="pushToCart(item)" v-if="token & item.stock > 0">Add To Cart</button>
-                                    <button class="btn btn-dark my-2 my-sm-0 btn-sm" type="button" disabled v-on:click="pushToCart(item)" v-else-if="token & item.stock < 1">Add To Cart</button>
+                                    <button class="btn btn-dark my-2 my-sm-0 btn-sm" type="button" v-on:click="pushToCart(item)"
+                                        v-if="token & item.stock > 0">Add To Cart</button>
+                                    <button class="btn btn-dark my-2 my-sm-0 btn-sm" type="button" disabled v-on:click="pushToCart(item)"
+                                        v-else-if="token & item.stock < 1">Add To Cart</button>
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -170,6 +183,68 @@
         </div>
         <!-- /.container -->
 
+        <!-- modal history -->
+
+        <div class="modal fade" id="history" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">My Cart</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table">
+                                <tr>
+                                    <th scope="row">Name</th>
+                                    <td> {{loginName}} </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Address</th>
+                                    <td> {{loginAddress}} </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Phone</th>
+                                    <td> {{loginPhone}} </td>
+                                </tr>
+                            </table>
+                            <div v-if="dataHistory.length < 1">
+                                <h3>You dont have transaction history</h3>
+                            </div>
+                            <table class="table" v-if="dataHistory.length > 0" v-for="(data, index) in dataHistory">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Items</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"> {{index+1}} </th>
+                                        <td> {{data.itemCart}} 
+                                            <span v-for="item in data.itemCart">
+                                                <p> {{item}} </p>
+                                            </span>
+                                        </td>
+                                        <td> {{data.totalPrice}} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer" v-if="carts.length > 0">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="buy()">Submit</button>
+                            <p v-if="msgPush" style="color: green"> {{msgPush}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /modal history -->
 
         <!-- modal cart-->
         <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -261,12 +336,12 @@
                                 <input type="password" class="form-control" v-model="password">
                             </div>
                         </form>
-                       <div v-if="msgErr.length > 0" v-for="msg in msgErr">
+                        <div v-if="msgErr.length > 0" v-for="msg in msgErr">
                             <p style="color: red"> {{msg}} </p>
-                       </div>
-                       <div v-if="msgSc">
+                        </div>
+                        <div v-if="msgSc">
                             <p style="color: green"> {{msgSc}} </p>
-                       </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -279,7 +354,8 @@
         <!-- /modal login -->
 
         <!-- modal register -->
-        <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -311,12 +387,12 @@
                                 <input type="password" class="form-control" v-model="password">
                             </div>
                         </form>
-                       <div v-if="msgErr.length > 0" v-for="msg in msgErr">
+                        <div v-if="msgErr.length > 0" v-for="msg in msgErr">
                             <p style="color: red"> {{msg}} </p>
-                       </div>
-                       <div v-if="msgSc">
+                        </div>
+                        <div v-if="msgSc">
                             <p style="color: green"> {{msgSc}} </p>
-                       </div>
+                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -374,6 +450,8 @@
                 min: '',
                 max: '',
                 msgPush: '',
+                dataHistory: [],
+                msgScBuy: ''
             },
             methods: {
                 showJacket() {
@@ -417,7 +495,7 @@
                         this.totalPrice += cart.price
                     });
 
-                    
+
                 },
 
                 cancel(index) {
@@ -433,44 +511,44 @@
 
                 register() {
                     this.msgErr = []
-                    if(!this.name){
+                    if (!this.name) {
                         this.msgErr.push('name is required')
                     }
 
-                    if(!this.email){
+                    if (!this.email) {
                         this.msgErr.push('email is required')
                     }
 
-                    if(!this.address){
+                    if (!this.address) {
                         this.msgErr.push('address is required')
                     }
 
-                    if(!this.phone){
+                    if (!this.phone) {
                         this.msgErr.push('phone is required')
                     }
 
-                    if(!this.password){
+                    if (!this.password) {
                         this.msgErr.push('password is required')
                     }
 
-                    if(this.msgErr.length < 1){
+                    if (this.msgErr.length < 1) {
                         axios({
-                            method: 'POST',
-                            url: base_url,
-                            data: {
-                                name: this.name,
-                                email: this.email,
-                                address: this.address,
-                                phone: this.phone,
-                                password: this.password
-                            }
-                        })
+                                method: 'POST',
+                                url: base_url,
+                                data: {
+                                    name: this.name,
+                                    email: this.email,
+                                    address: this.address,
+                                    phone: this.phone,
+                                    password: this.password
+                                }
+                            })
                             .then((result) => {
                                 this.msgErr = []
                                 this.msgSc = 'registrasi succes'
                             })
                             .catch((err) => {
-                                if(err.response.data.err.errors.email.message){
+                                if (err.response.data.err.errors.email.message) {
                                     this.msgErr.push('email is already in use')
                                 }
                             });
@@ -481,24 +559,24 @@
 
                 login() {
                     this.msgErr = []
-                    if(!this.email){
+                    if (!this.email) {
                         this.msgErr.push('email is required')
                     }
 
-                    if(!this.password){
+                    if (!this.password) {
                         this.msgErr.push('password is required')
 
                     }
 
-                    if(this.msgErr.length < 1){
+                    if (this.msgErr.length < 1) {
                         axios({
-                            method: 'POST',
-                            url: `${base_url}/signin`,
-                            data: {
-                                email: this.email,
-                                password: this.password
-                            }
-                        })
+                                method: 'POST',
+                                url: `${base_url}/signin`,
+                                data: {
+                                    email: this.email,
+                                    password: this.password
+                                }
+                            })
                             .then((result) => {
                                 this.msgErr = []
                                 localStorage.setItem('token', result.data.token)
@@ -509,12 +587,12 @@
                                 this.loginPhone = result.data.loginPhone
                             })
                             .catch((err) => {
-                               if(err.response.data.msg){
-                                   this.msgErr.push(err.response.data.msg)
-                               }
+                                if (err.response.data.msg) {
+                                    this.msgErr.push(err.response.data.msg)
+                                }
                             });
                     }
-                    
+
                 },
 
                 logout() {
@@ -526,7 +604,7 @@
                     this.msgSc = ''
                     this.msgErr = []
                     this.email = '',
-                    this.password = ''
+                        this.password = ''
                 },
 
                 remove_isReg() {
@@ -540,44 +618,28 @@
                 },
 
                 buy() {
-                    // axios({
-                    //     method: 'POST',
-                    //     url: base_url+'/transactions',
-                    //     data: {
-                    //         itemCart: this.carts,
-                    //         totalPrice: this.totalPrice,
-                    //     },
-                    //     headers: {
-                    //         token: localStorage.getItem('token')
-                    //     }
-                    // })
-                    // .then((result) => {
-                    //     console.log(result);
-                    // })
-                    // .catch((err) => {
-                    //     console.log(err);
+                   
+                    this.carts.forEach(cart => {
                         
-                    // });
+                        axios({
+                            method: 'PUT',
+                            url: base_url + '/items/buy',
+                            headers: {
+                                token: localStorage.getItem('token')
+                            },
+                            data: {
+                                id: cart._id
+                            }
+                        })
+                            .then((result) => {
+                                this.carts = []
+                            })
+                            .catch((err) => {
+                                console.log(err);
 
-                    // this.carts.forEach(cart => {
-                    //     axios({
-                    //         method: 'PUT',
-                    //         url: base_url + '/items/buy',
-                    //         headers: {
-                    //             token: localStorage.getItem('token')
-                    //         },
-                    //         data: {
-                    //             id: cart._id
-                    //         }
-                    //     })
-                    //         .then((result) => {
-                    //             console.log(result);
-                    //         })
-                    //         .catch((err) => {
-                    //             console.log(err);
-
-                    //         });
-                    // });
+                            });
+                    });
+                    this.msgScBuy = 'transaction success'
                     this.carts = []
                 },
 
@@ -595,20 +657,19 @@
                     this.min = ''
                     this.max = ''
                 },
-
-
+                
             },
             mounted() {
                 let isToken = localStorage.getItem('token')
                 if (isToken) {
                     this.token = true
                     axios({
-                        method: 'GET',
-                        url: base_url + '/users',
-                        headers: {
-                            token: localStorage.getItem('token')
-                        }
-                    })
+                            method: 'GET',
+                            url: base_url + '/users',
+                            headers: {
+                                token: localStorage.getItem('token')
+                            }
+                        })
                         .then((result) => {
                             this.loginName = result.data.loginName
                             this.loginAddress = result.data.loginAddress
@@ -621,9 +682,9 @@
                 }
 
                 axios({
-                    method: 'GET',
-                    url: base_url + '/items'
-                })
+                        method: 'GET',
+                        url: base_url + '/items'
+                    })
                     .then((result) => {
                         this.items = result.data
                         this.showJacket()
@@ -642,7 +703,9 @@
 
                 isLogout: function () {
                     this.token = false
-                }
+                },
+
+
             }
 
         })
